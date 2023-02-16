@@ -1,1 +1,69 @@
 기본기를 다시 공부해야 겠다고 생각해서 포인터 부터 공부하기 시작했다.
+* -> 포인터의 의미 -> 주소를 저장하는 바구니
+포인터 연산
+1) 주소연산자(&)
+2) 산술연산자(+ -)
+3) 간접연산자(*)
+4) 간접맴버연산자(->)
+포인터 실습
+#include <iostream>
+using namespace std;
+struct StatInfo
+{
+    int hp; 
+    int attack;
+    int defence;
+};
+void EnterLobby();
+StatInfo CreatePlayer();
+void CreateMonster(StatInfo* info);
+int main()
+{
+    EnterLobby();
+    return 0;
+}
+void EnterLobby()
+{
+    cout << "로비에 입장했습니다." << endl;
+
+    StatInfo player;
+    
+    player.hp = 0xbbbbbbbb;
+    player.attack = 0xbbbbbbbb;
+    player.defence = 0xbbbbbbbb;
+    
+    player = CreatePlayer();
+
+    StatInfo monster;
+
+    monster.hp = 0xbbbbbbbb;
+    monster.attack = 0xbbbbbbbb;
+    monster.defence = 0xbbbbbbbb;
+
+    CreateMonster(&monster);
+}
+StatInfo CreatePlayer()
+{
+    StatInfo ret;
+
+    cout << "플레이어 생성" << endl;
+    ret.hp = 100;
+    ret.attack = 10;
+    ret.defence = 2;
+
+    return ret;
+}
+
+void CreateMonster(StatInfo* info)
+{
+    cout << "몬스터 생성" << endl;
+    
+    info->hp = 40;
+    info->attack = 8;
+    info->hp = 1;
+}
+플레이어와 몬스터를 생성하는 실습을 해보았다.
+코드를 보면 알수있듯이 플레이어와 몬스터의 생성방식이 다른 것을 확인할 수 있다.
+분석해보면 플레이어를 생성한 방식은 다른 stack 메모리에 저장해둔 값을 옮기는 방식이고 
+몬스터를 생성한 방식은 몬스터의 주소를 참조해 직접적으로 저 변수에 값을 넣는 것을 확인할 수 있었다.
+이를 통해 몬스터를 생성한 방식이 주소를 직접적으로 참조하였기에 효율성과 가독성이 도 좋다고 할 수 있다.
