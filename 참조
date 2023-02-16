@@ -1,0 +1,27 @@
+값을 수정하지 않는다면, 양쪽 다 일단 문제 없음
+1) 값 전달 방식
+void PrintInfoByCopy(StatInfo info)
+{
+ cout << info.hp<<endl; 
+}
+2) 주소 전달 방식
+void PrintInfoByPtr(StatInfo* info)
+{
+ cout << info->hp<<endl; 
+}
+if) StatInfo 구조체가 1000바이트짜리 대형 구조체라면??
+- (값 전달) 1000바이트가 복사됨
+- (주소 전달) 8바이트 또는 4바이트가 복사됨
+주소 전달방식이 훨씬 효율이 좋음을 알 수 있음
+3) 참조 전달 방식
+void PrintInfoByRef(StatInfo& info)
+{
+  cout << intfo.hp << endl;
+}
+int number = 1;
+(1) int* pointer = &number;
+    *pointer = 2; 
+(2) int& reference = number;
+    reference = 2;
+(1),(2) 둘다 같은 행위이다.
+but,->를 사용하지 않아도 된다.(1),(2)의 장점을 합친 느낌
